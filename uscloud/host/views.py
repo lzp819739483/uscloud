@@ -18,7 +18,7 @@ host = Blueprint('host', __name__, url_prefix='/hosts')
 
 
 @host.route('/', methods=['GET', 'POST'])
-# @login_required
+@login_required
 def index():
     form = AddHostForm()
     if request.method == 'GET':
