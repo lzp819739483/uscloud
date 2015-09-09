@@ -13,7 +13,7 @@ db = SQLAlchemy(app)
 bootstrap = Bootstrap(app)
 
 login_manager = LoginManager()
-login_manager.session_protection = 'strong'
+# login_manager.session_protection = 'strong'
 login_manager.login_view = 'frontend.login'
 login_manager.init_app(app)
 
