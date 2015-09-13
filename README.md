@@ -1,7 +1,6 @@
 # uscloud
 
-uscloud将具备[OpenStack](https://www.openstack.org/)的基本功能,具备简单的服
-务器和虚拟机管理功能,可以用于在局域网内构建小型私有云
+uscloud将具备[OpenStack](https://www.openstack.org/)的基本功能,具备简单的服务器和虚拟机管理功能,可以用于在局域网内构建小型私有云
 
 uscloud 的基本功能如下:
 
