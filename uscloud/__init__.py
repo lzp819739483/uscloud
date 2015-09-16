@@ -1,1 +1,3 @@
-__author__ = 'li'
+from flask import Flask
+
+app = Flask(__name__)
