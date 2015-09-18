@@ -1,12 +1,14 @@
 import os
 
 from flask.ext.script import Manager
-from flask.ext.migrate import Migrate
+from flask.ext.migrate import Migrate, MigrateCommand
 
-from uscloud import app
+from uscloud import app, db
 
 
+Migrate = Migrate(app, db)
 manager = Manager(app)
+manager.add_command('db', MigrateCommand)
 
 if __name__ == '__main__':
     manager.run()

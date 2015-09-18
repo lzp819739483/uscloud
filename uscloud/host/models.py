@@ -1,9 +1,9 @@
 #!/usr/bin/env python
 # encoding: utf-8
 
-"""
-@author: li
-@software: PyCharm
-@file: models
-@time: 16/09/15 7:37
-"""
+from uscloud import db
+
+class Host(db.Model):
+    __tablename__ = 'hosts'
+
+
