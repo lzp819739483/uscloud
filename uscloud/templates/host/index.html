@@ -1,4 +1,5 @@
 {% extends "bootstrap/base.html" %}
+{% import "bootstrap/wtf.html" as wtf %}
 {% block title %}Uscloud{% endblock %}
 {% block navbar %}
     <nav class="navbar navbar-default" role="navigation">
@@ -7,8 +8,7 @@
 {% endblock %}
 {% block content %}
     <div class="container">
-        <div class="page-header">
-        <div class="btn btn-success" data‐toggle="modal" data‐target="#myModal">+AddHost</div>
+        <div class="btn btn-success" data-toggle="modal" data-target="#myModal" >+AddHost</div>
         <table class="table table-hover">
             <thead>
                 <tr>
@@ -16,6 +16,7 @@
                     <th>ip</th>
                     <th>name</th>
                     <th>status</th>
+                    <th>edit</th>
                 </tr>
             </thead>
             <tbody>
@@ -25,10 +26,27 @@
                     <th>{{ item.ip }}</th>
                     <th>{{ item.name }}</th>
                     <th>{{ item.status_code }}</th>
+                    <th><a href="{{ url_for('host.delete_host', host_id=item.id) }}"><span class="btn btn-danger">delect</span></a></th>
                 </tr>
                 {% endfor %}
             </tbody>
         </table>
+    </div>
+    <div class="modal fade" id="myModal">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title">Add Host</h4>
+                </div>
+                <div class="modal-body">
+                    {{ wtf.quick_form(form) }}
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                </div>
+            </div>
         </div>
     </div>
+
 {% endblock %}
