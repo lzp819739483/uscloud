@@ -58,3 +58,9 @@ target/
 
 # virtualenv
 venv/
+
+# migrate
+migrations/
+
+# db
+*.db
