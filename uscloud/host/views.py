@@ -9,6 +9,7 @@
 """
 
 from flask import Blueprint, request, render_template, redirect, url_for
+from flask.ext.login import login_required
 from .models import Host
 from .forms import AddHostForm
 from .. import db
@@ -17,6 +18,7 @@ host = Blueprint('host', __name__, url_prefix='/hosts')
 
 
 @host.route('/', methods=['GET', 'POST'])
+# @login_required
 def index():
     form = AddHostForm()
     if request.method == 'GET':

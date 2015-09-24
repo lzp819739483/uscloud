@@ -1,9 +1,8 @@
 #!/usr/bin/env python
 # encoding: utf-8
+from flask import Blueprint, request, render_template, redirect, url_for
+from .models import User
+# from .forms import AddHostForm
+from .. import db
 
-"""
-@author: li
-@software: PyCharm
-@file: views
-@time: 23/09/15 7:32
-"""
+user = Blueprint('user', __name__, url_prefix='/user')

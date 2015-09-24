@@ -12,8 +12,10 @@ HOST_STATUS = {
     HOST_ERROR: 'ERROR',
 }
 
+
 class Host(db.Model):
     __tablename__ = 'hosts'
+
     id = db.Column(db.Integer, primary_key=True)
     ip = db.Column(db.String(64), nullable=False, unique=True)
     name = db.Column(db.String(64), nullable=False)
