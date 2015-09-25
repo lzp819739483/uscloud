@@ -3,8 +3,9 @@
 from flask import Blueprint, render_template, redirect, request, url_for, flash
 from flask.ext.login import login_required, login_user, logout_user
 
-from .forms import LoginForm
+from .forms import LoginForm, RegistrationForm
 from ..user.models import User
+from uscloud import db
 
 
 frontend = Blueprint('frontend', __name__)
@@ -32,6 +33,17 @@ def login():
 def logout():
     logout_user()
     flash('You have logout')
-    return  redirect(url_for('frontend.login'))
+    return redirect(url_for('frontend.login'))
+
+@frontend.route('/register', methods=['GET', 'POST'])
+def register():
+    form = RegistrationForm()
+    if form.validate_on_submit():
+        user = User(name=form.name.data, email=form.email.data, password=form.password.data)
+        db.session.add(user)
+        # db.session.commit()
+        flash('You can now login.')
+        return redirect(url_for('frontend.login'))
+    return render_template('frontend/register.html', form=form)
 
 
