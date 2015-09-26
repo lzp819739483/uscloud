@@ -64,3 +64,6 @@ migrations/
 
 # db
 *.db
+
+# instance
+instance/*
