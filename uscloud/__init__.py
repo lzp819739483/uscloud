@@ -2,11 +2,13 @@ from flask import Flask
 from flask.ext.sqlalchemy import SQLAlchemy
 from flask.ext.bootstrap import Bootstrap
 from flask.ext.login import LoginManager
+from flask.ext.mail import Mail
 from flask_debugtoolbar import DebugToolbarExtension
 
-app = Flask(__name__)
+app = Flask(__name__, instance_relative_config=True)
 
 app.config.from_object('config')
+app.config.from_pyfile('config.py')
 
 db = SQLAlchemy(app)
 
@@ -17,6 +19,8 @@ login_manager = LoginManager()
 # login_manager.session_protection = 'strong'
 login_manager.login_view = 'frontend.login'
 login_manager.init_app(app)
+
+mail = Mail(app)
 
 toolbar = DebugToolbarExtension(app)
 
