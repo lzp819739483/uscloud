@@ -21,7 +21,10 @@
                     <th>{{ item.ip }}</th>
                     <th>{{ item.name }}</th>
                     <th>{{ item.status_code }}</th>
-                    <th><a href="{{ url_for('host.delete_host', host_id=item.id) }}"><span class="btn btn-danger">delect</span></a></th>
+                    <th>
+                        <a href="{{ url_for('host.validate_host', host_id=item.id) }}"><span class="btn btn-info btn-xs">validate</span></a>
+                        <a href="{{ url_for('host.delete_host', host_id=item.id) }}"><span class="btn btn-danger btn-xs">delect</span></a>
+                    </th>
                 </tr>
                 {% endfor %}
             </tbody>
