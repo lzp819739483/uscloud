@@ -1,1 +1,9 @@
+import os
+
 DEBUG = True
+
+MAIL_SERVER = 'smtp.126.com'
+MAIL_PORT = 587
+MAIL_USE_SSL = True
+MAIL_USERNAME = os.getenv('U_MAIL_USERNAME')
+MAIL_PASSWORD = os.getenv('U_MAIL_PASSWORD')

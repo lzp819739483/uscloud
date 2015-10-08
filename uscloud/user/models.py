@@ -49,7 +49,11 @@ class User(db.Model, UserMixin):
             return False
         self.confirmed = True
         db.session.add(self)
+        db.session.commit()
         return True
+
+    def is_admin(self):
+        return self.role == USER_ADMIN
 
 @login_manager.user_loader
 def load_user(user_id):

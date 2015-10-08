@@ -10,9 +10,11 @@
 
 from flask import Blueprint, request, render_template, redirect, url_for
 from flask.ext.login import login_required
+
 from .models import Host
 from .forms import AddHostForm
 from .. import db
+from ..decorators import admin_required
 
 host = Blueprint('host', __name__, url_prefix='/hosts')
 
@@ -21,18 +23,18 @@ host = Blueprint('host', __name__, url_prefix='/hosts')
 @login_required
 def index():
     form = AddHostForm()
-    if request.method == 'GET':
-        host_list = Host.query.all()
-        return render_template('host/index.html', host_list=host_list, form=form)
-    else:
-        if form.validate_on_submit():
-            host_instance = Host(ip=form.ip.data, name=form.name.data)
-            db.session.add(host_instance)
-            db.session.commit()
+    host_list = Host.query.all()
+    if form.validate_on_submit():
+        host_instance = Host(ip=form.ip.data, name=form.name.data)
+        db.session.add(host_instance)
+        db.session.commit()
         return redirect(url_for('host.index'))
+    return render_template('host/index.html', host_list=host_list, form=form)
 
 
 @host.route('/<int:host_id>/delete', methods=['GET', 'POST'])
+@login_required
+@admin_required
 def delete_host(host_id):
     host_instance = Host.query.filter(Host.id == host_id).first()
     if host_instance:

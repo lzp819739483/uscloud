@@ -1,27 +1,26 @@
-{% extends "base.html" %}
-{% import "bootstrap/wtf.html" as wtf %}
-
+{% extends 'base.html' %}
+{% import 'bootstrap/wtf.html' as wtf %}
 {% block page_content %}
     <div class="container">
-        <div class="btn btn-success" data-toggle="modal" data-target="#myModal" >+AddHost</div>
+    <div class="btn btn-success" data-toggle="modal" data-target="#myModal" >+AddMyVM</div>
         <table class="table table-hover">
             <thead>
                 <tr>
                     <th>id</th>
-                    <th>ip</th>
                     <th>name</th>
-                    <th>status</th>
+                    <th>template_name</th>
+                    <th>create_time</th>
                     <th>edit</th>
                 </tr>
             </thead>
             <tbody>
-                {% for item in host_list %}
+                {% for item in vm_list %}
                 <tr>
                     <th>{{ loop.index }}</th>
-                    <th>{{ item.ip }}</th>
                     <th>{{ item.name }}</th>
-                    <th>{{ item.status_code }}</th>
-                    <th><a href="{{ url_for('host.delete_host', host_id=item.id) }}"><span class="btn btn-danger">delect</span></a></th>
+                    <th>{{ item.template.name }}</th>
+                    <th>{{ item.create_time }}</th>
+                    <th><a href="{{ url_for('template.delete_temp', temp_id=item.id) }}"><span class="btn btn-danger">delect</span></a></th>
                 </tr>
                 {% endfor %}
             </tbody>
@@ -32,7 +31,7 @@
             <div class="modal-content">
                 <div class="modal-header">
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                    <h4 class="modal-title">Add Host</h4>
+                    <h4 class="modal-title">Add VM</h4>
                 </div>
                 <div class="modal-body">
                     {{ wtf.quick_form(form) }}
@@ -43,5 +42,4 @@
             </div>
         </div>
     </div>
-
 {% endblock %}

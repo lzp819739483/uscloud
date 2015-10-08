@@ -5,6 +5,8 @@ from flask.ext.login import LoginManager
 from flask.ext.mail import Mail
 from flask_debugtoolbar import DebugToolbarExtension
 
+from .filter import *
+
 app = Flask(__name__, instance_relative_config=True)
 
 app.config.from_object('config')
@@ -32,3 +34,14 @@ app.register_blueprint(userModule)
 
 from uscloud.frontend.views import frontend as frontendModule
 app.register_blueprint(frontendModule)
+
+from uscloud.image.views import image as imageModule
+app.register_blueprint(imageModule)
+
+from uscloud.template.views import template as templateModule
+app.register_blueprint(templateModule)
+
+from uscloud.vm.views import vm as vmModule
+app.register_blueprint(vmModule)
+
+app.jinja_env.filters['role_display']=role_display
