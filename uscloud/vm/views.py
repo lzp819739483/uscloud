@@ -28,9 +28,19 @@ def index():
 
 
 def get_host():
+    """
+    :return host ip
+    """
     host_ok_all = Host.query.filter(Host.status_code == 0)
+    domain_count = {}
     for host_ok in host_ok_all:
         host_ok_uri = 'qemu+ssh://root@'+host_ok.ip+'/system'
         host_ok_conn = libvirt.open(host_ok_uri)
-        host_ok_domain = host_ok_conn.listDefinedDomains()
-        print type(host_ok_domain)
+        host_ok_domain_count = len(host_ok_conn.listDefinedDomains())
+        domain_count[host_ok_domain_count] = host_ok.ip
+    try:
+        host_result = sorted(domain_count.items(), key=lambda x: x[0], reverse=True)[0][1]
+    except:
+        host_result = None
+
+    return host_result
